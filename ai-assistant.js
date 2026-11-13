@@ -114,7 +114,8 @@
     'Thời gian dự kiến tính từ khi thống nhất yêu cầu và nhận đủ tài liệu: Miễn phí 5–7 ngày (xếp sau đơn trả phí), Cơ bản 1–2 ngày, Chuyên nghiệp 2–3 ngày, Nâng cao 3–5 ngày.',
     'Hoàn tiền được xem xét khi Klyro không thực hiện được dịch vụ, giao trễ không thỏa thuận, hoặc sản phẩm sai khác đáng kể và không thể khắc phục.',
     'Liên hệ chính thức: ' + CONTACT + '. Website chưa công bố số điện thoại/hotline.',
-    'Trạng thái đơn được tra cứu bằng mã dạng SC-XXXXXXXX.'
+    'Trạng thái đơn được tra cứu bằng mã dạng SC-XXXXXXXX.',
+    'Cần đăng ký/đăng nhập tài khoản (email + mật khẩu từ 8 ký tự) trước khi gửi đơn; nếu quên mật khẩu, chọn “Quên mật khẩu” để nhận mã 6 số qua email. Tài khoản có thể nhận thông báo từ Klyro, và Klyro có thể tạm hạn chế một số gói với tài khoản dùng sai quy định (khách sẽ thấy lý do khi đăng nhập). Gói Miễn phí tối đa 2 đơn / 24 giờ cho mỗi tài khoản.'
   ];
 
   /* ------------------------------------------------------------------ *
@@ -184,7 +185,7 @@
   var SERVICE_RE = new RegExp(
     '\\b(slide|slides|powerpoint|ppt|pptx|canva|thuyet trinh|trinh chieu|bai giang|' +
     'bao cao|khoa luan|luan van|do an|klyro|giftcode|ma giam gia|uu dai|khuyen mai|' +
-    'dat hang|don hang|trang thai don|ma don|thanh toan|chuyen khoan|hoan tien|' +
+    'dat hang|dang nhap|dang ky|tai khoan|mat khau|thong bao|don hang|trang thai don|ma don|thanh toan|chuyen khoan|hoan tien|' +
     'chinh sua|deadline|thoi gian giao|thoi gian hoan thanh|bao gia|bang gia|chi phi|' +
     'gia goi|gia slide|chon goi|goi dich vu|goi co ban|goi chuyen nghiep|goi nang cao|' +
     'tu van|bao mat|du lieu ca nhan|quyen rieng tu|lien he|gui email|ho tro|' +
@@ -758,6 +759,14 @@
       return {
         text: 'Bạn có thể liên hệ Klyro qua email **' + CONTACT + '**. Website hiện công bố email là kênh liên hệ chính; mình không có số điện thoại/hotline khác để cung cấp.',
         actions: [emailAction('Gửi email cho Klyro')],
+        source: 'local'
+      };
+    }
+
+    if (/\b(dang nhap|dang ky|tai khoan|mat khau|quen mat khau)\b/.test(t)) {
+      return {
+        text: 'Để gửi yêu cầu làm slide, bạn cần **đăng ký/đăng nhập** bằng email và mật khẩu (từ 8 ký tự). Quên mật khẩu thì chọn “Quên mật khẩu” ở cửa sổ đăng nhập, Klyro sẽ gửi mã 6 số qua email. Sau khi đăng nhập, bạn xem được thông báo từ Klyro và các đơn của mình ngay trong mục tài khoản.',
+        actions: [scrollAction('Xem bảng giá', '#goi'), emailAction('Gửi email cho Klyro')],
         source: 'local'
       };
     }
