@@ -367,10 +367,11 @@ footer{padding-bottom:max(84px,calc(env(safe-area-inset-bottom) + 70px))}
 </form>
 <p class="kai-note">Klyro AI chỉ hỗ trợ thông tin dịch vụ slide. Vui lòng không gửi thông tin nhạy cảm.</p>
 </section>
+<script src="klyro-config.js"></script>
 <script>
 
 const CONFIG = Object.freeze({
-  scriptUrl: 'https://script.google.com/macros/s/AKfycbzew6e2Qf3Cu5O-FSNYJaT5QCBLArJ2u6BM52_aEKPQbsClLSxDS4EB8VSp2jh4y3KI/exec',
+  scriptUrl: (window.KLYRO_CONFIG && window.KLYRO_CONFIG.scriptUrl) || '',
   email: 'chiasefile9@gmail.com',
   canvaUrl: 'https://www.canva.com/design/DAHXzQuoxVw/ODnUMu7WlZmMWAbn7T62ZQ/view?utm_content=DAHXzQuoxVw&utm_campaign=designshare&utm_medium=link&utm_source=viewer'
 });
@@ -431,7 +432,7 @@ function onPackageOrSlidesChanged(){
  resetGiftcode(true);$('codeMsg').textContent='Gói hoặc số slide đã thay đổi. Vui lòng áp dụng lại Giftcode nếu cần.';updateTotalView()
 }
 async function postToScript(data){
- if(!CONFIG.scriptUrl||CONFIG.scriptUrl.includes('PASTE_NEW_'))throw new Error('Website chưa được cấu hình URL Apps Script. Vui lòng liên hệ quản trị viên.');
+ if(!CONFIG.scriptUrl||CONFIG.scriptUrl.includes('PASTE_NEW_'))throw new Error('Website chưa có URL Apps Script. Hãy mở file klyro-config.js và dán URL vào dòng scriptUrl.');
  const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
  try{
   const response=await fetch(CONFIG.scriptUrl,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(authState.token&&!data.token?Object.assign({token:authState.token},data):data),signal:controller.signal});
