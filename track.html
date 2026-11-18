@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tra Cứu Trạng Thái Đơn Hàng — Klyro</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; color: #fafafa; }
+    .glass { background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="glass border-b border-zinc-800/80">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
+        <span class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm">K</span>
+        <span>Klyro Tracking</span>
+      </a>
+      <a href="index.html" class="text-sm text-zinc-400 hover:text-white transition">← Về trang chủ</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-xl mx-auto w-full px-4 py-16">
+    <div class="glass p-8 rounded-3xl text-center">
+      <h1 class="text-2xl font-extrabold mb-2">Tra Cứu Trạng Thái Đơn</h1>
+      <p class="text-sm text-zinc-400 mb-6">Nhập mã đơn hàng của bạn để kiểm tra tiến độ thiết kế.</p>
+      
+      <div class="flex gap-2 mb-6">
+        <input type="text" id="search-code" placeholder="VD: KLYRO1234" class="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm uppercase focus:outline-none focus:border-indigo-500 font-mono">
+        <button id="search-btn" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-semibold transition">Tra cứu</button>
+      </div>
+
+      <!-- Kết quả hiển thị -->
+      <div id="result-box" class="hidden text-left bg-zinc-900/80 border border-zinc-800 p-5 rounded-2xl space-y-3 text-sm">
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">Mã đơn hàng:</span>
+          <span id="res-id" class="font-mono font-bold text-indigo-400"></span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">Gói dịch vụ:</span>
+          <span id="res-pkg" class="font-medium"></span>
+        </div>
+        <div class="flex justify-between border-b border-zinc-800 pb-2">
+          <span class="text-zinc-400">Khách hàng:</span>
+          <span id="res-name"></span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-zinc-400">Trạng thái:</span>
+          <span id="res-status" class="px-3 py-1 rounded-full text-xs font-bold"></span>
+        </div>
+      </div>
+      
+      <p id="error-msg" class="text-sm text-rose-400 mt-4 hidden">Không tìm thấy mã đơn hàng này. Vui lòng kiểm tra lại!</p>
+    </div>
+  </main>
+
+  <script src="klyro-config.js"></script>
+  <script>
+    // Hàm này sẽ gọi trực tiếp Google Apps Script để tìm kiếm dòng đơn hàng theo mã
+    document.getElementById('search-btn').addEventListener('click', async () => {
+      const code = document.getElementById('search-code').value.trim().toUpperCase();
+      const resultBox = document.getElementById('result-box');
+      const errorMsg = document.getElementById('error-msg');
+      const btn = document.getElementById('search-btn');
+
+      if (!code) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Đang tìm...';
+      resultBox.classList.add('hidden');
+      errorMsg.classList.add('hidden');
+
+      try {
+        // Gửi request lấy dữ liệu từ Google Apps Script (Thêm action=search)
+        const response = await fetch(`${KLYRO_CONFIG.apiEndpoint}?action=search&orderId=${code}`);
+        const data = await response.json();
+
+        if (data.status === 'found') {
+          document.getElementById('res-id').textContent = data.orderId;
+          document.getElementById('res-pkg').textContent = data.packageName;
+          document.getElementById('res-name').textContent = data.customerName;
+          
+          const statusEl = document.getElementById('res-status');
+          statusEl.textContent = data.statusText;
+          
+          // Đổi màu nhãn trạng thái tùy theo tiến độ
+          if (data.statusText.includes('Đã thanh toán') || data.statusText.includes('Đã duyệt')) {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+          } else if (data.statusText.includes('Hoàn thành')) {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30';
+          } else {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30';
+          }
+
+          resultBox.classList.remove('hidden');
+        } else {
+          errorMsg.classList.remove('hidden');
+        }
+      } catch (err) {
+        alert('Lỗi kết nối đến máy chủ. Vui lòng thử lại sau!');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Tra cứu';
+      }
+    });
+  </script>
+</body>
+</html>
