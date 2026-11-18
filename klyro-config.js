@@ -5,5 +5,5 @@
    tải lại lên hosting. Không cần sửa index.html.
    ===================================================================== */
 window.KLYRO_CONFIG = {
-  scriptUrl: 'https://script.google.com/macros/s/AKfycbyCr62Mlu6BhbakEkdTqzEoBzegfEQom6P0j43OjfyXqKt2LAc20MqKAKNkXe-4dmz2/exec'
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbyJzjsxpJdIeThkYE5ZdH7uMR-fekbeEzoe9_UHh6b5DuI3Uo89XBjm3FyaIOQ32cO1/exec'
 };
