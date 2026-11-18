@@ -9,13 +9,13 @@ const KLYRO_CONFIG = {
   },
   
   // Link Web App từ Google Apps Script của bạn
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbyJzjsxpJdIeThkYE5ZdH7uMR-fekbeEzoe9_UHh6b5DuI3Uo89XBjm3FyaIOQ32cO1/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbxHeKMV0In4eJr08vtTPU9OpMedSMxReQZBTFFexi85ZpMdHDIq03ZwDHyJCKiAW1tk/exec",
 
   // Thông tin nhận thanh toán (Dùng để tạo VietQR tự động)
   payment: {
     bankId: "Zalopay", // Mã ngân hàng (VD: MB, VCB, TCB, ACB, BIDV...)
     accountNo: "99ZP26294M80657068", // Số tài khoản của bạn
-    accountName: "NGUYEN VAN TUYEN", // Tên chủ tài khoản (viết hoa không dấu)
+    accountName: "CHƯA HOÀN TẤT CHỨC NĂNG NÀY", // Tên chủ tài khoản (viết hoa không dấu)
     template: "compact2"
   },
 
