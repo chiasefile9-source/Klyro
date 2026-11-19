@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klyro — Thiết kế slide chỉn chu cho học sinh, sinh viên</title>
+  <title>Tra cứu đơn hàng — Klyro</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,220 +14,143 @@
       color: #fafafa;
     }
     .glass {
-      background: rgba(24, 24, 27, 0.72);
+      background: rgba(24, 24, 27, 0.75);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .hero-glow {
-      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2), rgba(14, 165, 233, 0.07) 45%, transparent 75%);
-    }
   </style>
 </head>
-<body class="antialiased selection:bg-indigo-500 selection:text-white">
+<body class="antialiased min-h-screen flex flex-col">
 
   <!-- Header -->
   <header class="sticky top-0 z-40 glass border-b border-zinc-800/80">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-      <a href="index-main.html" class="flex items-center gap-2.5 font-extrabold text-lg tracking-tight">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <a href="index-main.html" class="flex items-center gap-2.5 font-extrabold text-lg tracking-tight shrink-0">
         <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-sm text-white shadow-md shadow-indigo-500/30">K</span>
-        <span id="brand-name">Klyro</span>
+        <span>Klyro</span>
       </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-sm text-zinc-300">
-        <a href="#packages" class="hover:text-white transition">Các gói slide</a>
-        <a href="#policy" class="hover:text-white transition">Thời gian & chính sách</a>
-        <a href="track.html" class="hover:text-white transition">Tra cứu đơn</a>
-        <a href="terms.html" class="hover:text-white transition">Điều khoản</a>
-        <a href="privacy.html" class="hover:text-white transition">Bảo mật</a>
-        <a href="refund.html" class="hover:text-white transition">Hoàn tiền</a>
-      </nav>
-
-      <div class="flex items-center gap-2.5">
-        <a href="track.html" class="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-xs sm:text-sm font-semibold text-zinc-200 transition">
-          Tra cứu đơn
-        </a>
-        <a href="payment.html" class="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:opacity-95 text-xs sm:text-sm font-bold text-white shadow-lg shadow-indigo-500/25 transition">
-          Đặt slide ngay
-        </a>
-      </div>
+      <a href="index-main.html" class="text-xs sm:text-sm text-zinc-400 hover:text-white transition shrink-0">← Về trang chủ</a>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-glow pt-16 pb-14 sm:pt-24 sm:pb-20 px-4 sm:px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs font-semibold mb-6">
-        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-        Làm trực tiếp bởi người thật — chăm chút từng trang chiếu
+  <!-- Main Content (căn cân đối phía trên, không bị đẩy thụt xuống quá sâu) -->
+  <main class="flex-1 w-full max-w-lg mx-auto px-4 pt-8 pb-12 sm:pt-12">
+    <div class="glass p-6 sm:p-8 rounded-3xl">
+      <div class="text-center mb-6">
+        <h1 class="text-xl sm:text-2xl font-extrabold mb-1.5">Tra Cứu Trạng Thái Đơn</h1>
+        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+          Nhập mã đơn hàng bạn nhận được sau khi đặt để xem tiến độ làm slide.
+        </p>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-5 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
-        Làm Slide Gọn Gàng, Dễ Nhìn Để Bạn Tự Tin Thuyết Trình
-      </h1>
+      <!-- Ô nhập mã & nút tra cứu: chống rớt dòng chữ trên nút -->
+      <form id="track-form" class="flex flex-col sm:flex-row gap-2.5 mb-5">
+        <input
+          type="text"
+          id="search-code"
+          placeholder="Ví dụ: KLYRO1234"
+          autocomplete="off"
+          class="w-full sm:flex-1 min-w-0 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 uppercase font-mono focus:outline-none focus:border-indigo-500"
+        >
+        <button
+          type="submit"
+          id="search-btn"
+          class="w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold transition whitespace-nowrap shrink-0"
+        >
+          Tra cứu
+        </button>
+      </form>
 
-      <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-        Mỗi bộ slide tại Klyro đều được sắp xếp bố cục và chọn lọc hình ảnh thủ công theo đúng nội dung của bạn. Tụi mình <strong class="text-zinc-200">không nhận làm gấp vài tiếng</strong> — thời gian giao từ <strong class="text-zinc-200">1 ngày (nhanh nhất)</strong> đến <strong class="text-zinc-200">tối đa 1 tuần</strong> để giữ chất lượng ổn định.
+      <!-- Kết quả hiển thị -->
+      <div id="result-box" class="hidden bg-zinc-900/90 border border-zinc-800 p-5 rounded-2xl space-y-3 text-sm">
+        <div class="flex items-center justify-between gap-3 border-b border-zinc-800 pb-2.5">
+          <span class="text-zinc-400 shrink-0">Mã đơn hàng:</span>
+          <span id="res-id" class="font-mono font-bold text-indigo-400 text-right break-all"></span>
+        </div>
+        <div class="flex items-start justify-between gap-3 border-b border-zinc-800 pb-2.5">
+          <span class="text-zinc-400 shrink-0">Gói đã chọn:</span>
+          <span id="res-pkg" class="font-medium text-right"></span>
+        </div>
+        <div class="flex items-center justify-between gap-3 border-b border-zinc-800 pb-2.5">
+          <span class="text-zinc-400 shrink-0">Khách hàng:</span>
+          <span id="res-name" class="text-right"></span>
+        </div>
+        <div class="flex items-center justify-between gap-3 pt-0.5">
+          <span class="text-zinc-400 shrink-0">Trạng thái:</span>
+          <span id="res-status" class="px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap"></span>
+        </div>
+      </div>
+
+      <p id="error-msg" class="text-xs sm:text-sm text-rose-400 text-center mt-3 hidden">
+        Chưa tìm thấy mã đơn hàng này. Bạn kiểm tra lại ký tự hoặc liên hệ <a href="mailto:cskh.klyro@gmail.com" class="underline font-medium">cskh.klyro@gmail.com</a> nhé!
       </p>
-
-      <div class="flex flex-wrap items-center justify-center gap-3.5">
-        <a href="#packages" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:opacity-95 font-bold text-sm sm:text-base text-white shadow-lg shadow-indigo-500/30 transition">
-          Xem bảng gói dịch vụ
-        </a>
-        <a href="track.html" class="px-6 py-3.5 rounded-2xl glass hover:bg-zinc-800/80 font-semibold text-sm sm:text-base text-zinc-200 transition">
-          Theo dõi tiến độ đơn
-        </a>
-      </div>
     </div>
-  </section>
-
-  <!-- Packages Section -->
-  <section id="packages" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">Bảng Giá Dành Cho Học Sinh, Sinh Viên</h2>
-      <p class="text-sm sm:text-base text-zinc-400">
-        Mức giá vừa phải để bạn dễ cân đối chi phí học tập, có gói trải nghiệm miễn phí dùng 1 lần cho mỗi Gmail hoặc số điện thoại.
-      </p>
-    </div>
-
-    <div id="packages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- JS tự động render gói từ KLYRO_CONFIG.packages -->
-    </div>
-  </section>
-
-  <!-- Time & Policy Highlights -->
-  <section id="policy" class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
-    <div class="glass rounded-3xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-      <div>
-        <div class="text-sky-400 font-bold text-base mb-1.5">Giao Từ 1 Ngày Đến 1 Tuần</div>
-        <p class="text-sm text-zinc-400 leading-relaxed">
-          Sớm nhất là ngày hôm sau và muộn nhất 1 tuần tùy số lượng slide. Không nhận đơn gấp rút vài tiếng.
-        </p>
-      </div>
-      <div>
-        <div class="text-indigo-400 font-bold text-base mb-1.5">Gói Free Giới Hạn 1 Lần</div>
-        <p class="text-sm text-zinc-400 leading-relaxed">
-          Mỗi Gmail hoặc số điện thoại/liên hệ chỉ áp dụng 1 lần duy nhất để bạn thử trước cách làm việc của Klyro.
-        </p>
-      </div>
-      <div>
-        <div class="text-emerald-400 font-bold text-base mb-1.5">Tra Cứu Trạng Thái Rõ Ràng</div>
-        <p class="text-sm text-zinc-400 leading-relaxed">
-          Mỗi đơn có mã riêng để bạn kiểm tra nhanh trạng thái tại <a href="track.html" class="text-indigo-400 underline">Tra cứu đơn</a>.
-        </p>
-      </div>
-    </div>
-
-    <!-- Chính sách & Hỗ trợ -->
-    <div class="glass rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-      <div class="space-y-1.5">
-        <h3 class="text-lg font-extrabold text-white">Chính Sách & Liên Hệ Hỗ Trợ</h3>
-        <p class="text-sm text-zinc-400 leading-relaxed">
-          Mọi trao đổi, gửi file bổ sung hoặc hỗ trợ đơn hàng đều qua email <a href="mailto:cskh.klyro@gmail.com" class="text-indigo-400 hover:underline font-medium">cskh.klyro@gmail.com</a>.
-        </p>
-      </div>
-      <div class="flex flex-wrap gap-2.5 text-xs sm:text-sm font-semibold">
-        <a href="terms.html" class="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-zinc-200 transition">
-          Điều khoản sử dụng
-        </a>
-        <a href="privacy.html" class="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-zinc-200 transition">
-          Chính sách bảo mật
-        </a>
-        <a href="refund.html" class="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/80 text-zinc-200 transition">
-          Chính sách hoàn tiền
-        </a>
-      </div>
-    </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="border-t border-zinc-800/80 mt-10 py-8 px-4 sm:px-6 text-sm text-zinc-400">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div id="footer-credit" class="font-medium text-zinc-300">Thiết kế bởi Klyro</div>
-      <div class="flex flex-wrap items-center gap-5 text-xs sm:text-sm">
-        <a href="terms.html" class="hover:text-white transition">Điều khoản</a>
-        <a href="privacy.html" class="hover:text-white transition">Bảo mật</a>
-        <a href="refund.html" class="hover:text-white transition">Hoàn tiền</a>
-        <a id="footer-email" href="mailto:cskh.klyro@gmail.com" class="hover:text-white transition">cskh.klyro@gmail.com</a>
-        <a id="footer-fb" href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Facebook</a>
-        <a id="footer-domain" href="https://ww.klyro.gt.tc" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Website</a>
+  <footer class="border-t border-zinc-800/80 py-6 px-4 text-xs text-zinc-500">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span>Thiết kế bởi Klyro</span>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="terms.html" class="hover:text-zinc-300 transition">Điều khoản</a>
+        <a href="privacy.html" class="hover:text-zinc-300 transition">Bảo mật</a>
+        <a href="refund.html" class="hover:text-zinc-300 transition">Hoàn tiền</a>
+        <a href="mailto:cskh.klyro@gmail.com" class="hover:text-zinc-300 transition">cskh.klyro@gmail.com</a>
       </div>
     </div>
   </footer>
 
   <script src="klyro-config.js"></script>
   <script>
-    (function () {
-      const formatVND = (num) => Number(num || 0).toLocaleString("vi-VN") + "đ";
+    const trackForm = document.getElementById('track-form');
+    const searchInput = document.getElementById('search-code');
+    const searchBtn = document.getElementById('search-btn');
+    const resultBox = document.getElementById('result-box');
+    const errorMsg = document.getElementById('error-msg');
 
-      if (typeof KLYRO_CONFIG !== "undefined") {
-        if (KLYRO_CONFIG.brand) {
-          const brandNameEl = document.getElementById("brand-name");
-          const creditEl = document.getElementById("footer-credit");
-          const emailEl = document.getElementById("footer-email");
-          const fbEl = document.getElementById("footer-fb");
-          const domainEl = document.getElementById("footer-domain");
+    trackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const code = searchInput.value.trim().toUpperCase();
+      if (!code) return;
 
-          if (brandNameEl && KLYRO_CONFIG.brand.name) brandNameEl.textContent = KLYRO_CONFIG.brand.name;
-          if (creditEl && KLYRO_CONFIG.brand.credit) creditEl.textContent = KLYRO_CONFIG.brand.credit;
-          if (emailEl) {
-            const supportMail = "cskh.klyro@gmail.com";
-            emailEl.textContent = supportMail;
-            emailEl.href = "mailto:" + supportMail;
+      searchBtn.disabled = true;
+      searchBtn.textContent = 'Đang tìm...';
+      resultBox.classList.add('hidden');
+      errorMsg.classList.add('hidden');
+
+      try {
+        const response = await fetch(`${KLYRO_CONFIG.apiEndpoint}?action=search&orderId=${encodeURIComponent(code)}`);
+        const data = await response.json();
+
+        if (data.status === 'found') {
+          document.getElementById('res-id').textContent = data.orderId;
+          document.getElementById('res-pkg').textContent = data.packageName;
+          document.getElementById('res-name').textContent = data.customerName;
+
+          const statusEl = document.getElementById('res-status');
+          const statusText = data.statusText || 'Chờ thanh toán';
+          statusEl.textContent = statusText;
+
+          if (statusText.includes('Đã thanh toán') || statusText.includes('Đã duyệt')) {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+          } else if (statusText.includes('Hoàn thành')) {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap bg-sky-500/20 text-sky-400 border border-sky-500/30';
+          } else {
+            statusEl.className = 'px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap bg-amber-500/20 text-amber-400 border border-amber-500/30';
           }
-          if (fbEl && KLYRO_CONFIG.brand.facebook) fbEl.href = KLYRO_CONFIG.brand.facebook;
-          if (domainEl && KLYRO_CONFIG.brand.domain) {
-            domainEl.href = KLYRO_CONFIG.brand.domain;
-            domainEl.textContent = KLYRO_CONFIG.brand.domain.replace(/^https?:\/\//, "");
-          }
+
+          resultBox.classList.remove('hidden');
+        } else {
+          errorMsg.classList.remove('hidden');
         }
-
-        const grid = document.getElementById("packages-grid");
-        if (grid && Array.isArray(KLYRO_CONFIG.packages)) {
-          grid.innerHTML = KLYRO_CONFIG.packages.map((pkg) => {
-            const isPopular = Boolean(pkg.popular);
-            const cardBorder = isPopular
-              ? "border-indigo-500/60 ring-1 ring-indigo-500/40"
-              : "border-white/10";
-            const featuresHtml = (pkg.features || [])
-              .map((f) => `<li class="flex items-start gap-2 text-xs sm:text-sm text-zinc-300"><span class="text-sky-400 mt-0.5">✓</span><span>${f}</span></li>`)
-              .join("");
-
-            return `
-              <div class="glass rounded-3xl p-6 flex flex-col justify-between ${cardBorder}">
-                <div>
-                  <div class="flex items-center justify-between gap-2 mb-3">
-                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-400/25">
-                      ${pkg.badge || "Gói thiết kế"}
-                    </span>
-                  </div>
-
-                  <h3 class="text-lg font-extrabold text-white mb-1.5">${pkg.name}</h3>
-                  <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">${pkg.description || ""}</p>
-
-                  <div class="flex items-baseline gap-2 mb-5">
-                    <span class="text-2xl sm:text-3xl font-extrabold text-sky-400">${formatVND(pkg.price)}</span>
-                    ${pkg.originalPrice ? `<span class="text-xs text-zinc-500 line-through">${formatVND(pkg.originalPrice)}</span>` : ""}
-                  </div>
-
-                  <ul class="space-y-2.5 mb-6">
-                    ${featuresHtml}
-                  </ul>
-                </div>
-
-                <a href="payment.html?pkg=${encodeURIComponent(pkg.id)}" class="block w-full text-center py-3 rounded-xl font-bold text-sm transition ${
-                  isPopular
-                    ? "bg-gradient-to-r from-sky-500 to-indigo-600 text-white hover:opacity-95 shadow-lg shadow-indigo-500/25"
-                    : "bg-zinc-800 hover:bg-zinc-700 text-white"
-                }">
-                  Chọn gói này
-                </a>
-              </div>
-            `;
-          }).join("");
-        }
+      } catch (err) {
+        alert('Không thể kết nối máy chủ lúc này. Bạn thử lại sau vài giây nhé!');
+      } finally {
+        searchBtn.disabled = false;
+        searchBtn.textContent = 'Tra cứu';
       }
-    })();
+    });
   </script>
 </body>
 </html>
