@@ -1,181 +1,95 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klyro — Dịch Vụ Thiết Kế Slide Thuyết Trình Chuyên Nghiệp</title>
-  <meta name="description" content="Klyro cung cấp giải pháp thiết kế slide PowerPoint, Canva, HTML hiện đại, sáng tạo và tối ưu chi phí cho học sinh, sinh viên và doanh nghiệp.">
-  
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="Klyro — Thiết Kế Slide Thuyết Trình Đẳng Cấp">
-  <meta property="og:description" content="Biến ý tưởng của bạn thành những trang slide ấn tượng chỉ từ 35.000đ.">
-  <meta property="og:url" content="https://ww.klyro.gt.tc">
-  <meta property="og:type" content="website">
-
+  <title>Klyro — Cùng gặp lại vào Tháng 12 nhé!</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; color: #fafafa; }
-    .glass { background: rgba(24, 24, 27, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .glow-card:hover { box-shadow: 0 0 30px rgba(99, 102, 241, 0.2); border-color: rgba(129, 140, 248, 0.4); transform: translateY(-4px); }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #09090b 75%);
+      color: #fafafa;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .glass {
+      background: rgba(24, 24, 27, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(99, 102, 241, 0.15);
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- Navbar -->
-  <header class="fixed top-0 w-full z-50 glass">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5 group">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center font-extrabold text-white shadow-lg group-hover:scale-105 transition">K</div>
-        <span class="text-xl font-bold tracking-tight">Klyro</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-        <a href="#features" class="hover:text-white transition">Ưu điểm</a>
-        <a href="#pricing" class="hover:text-white transition">Bảng giá</a>
-        <a href="#workflow" class="hover:text-white transition">Quy trình</a>
-      </nav>
-      <a href="#pricing" class="px-4 py-2 rounded-full bg-white text-zinc-950 text-sm font-semibold hover:bg-zinc-200 transition shadow">
-        Đặt Slide Ngay
-      </a>
+  <div class="glass max-w-lg w-full rounded-3xl p-8 sm:p-10 text-center">
+    <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center font-extrabold text-2xl text-white shadow-lg shadow-indigo-500/40">
+      K
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="pt-32 pb-20 px-4 sm:px-6 relative overflow-hidden">
-    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-indigo-300 mb-6">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Nhận thiết kế gấp trong 12h - 24h
-      </div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-        Nâng tầm bài thuyết trình với <span class="gradient-text">thiết kế chuẩn thẩm mỹ</span>
-      </h1>
-      <p class="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-        Không còn nỗi lo slide rối mắt hay thiếu thời gian. Klyro giúp bạn biến nội dung thô thành những trang trình chiếu mượt mà, hiện đại và thu hút mọi ánh nhìn.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#pricing" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold hover:opacity-90 transition shadow-lg shadow-indigo-500/25">
-          Xem bảng giá dịch vụ
-        </a>
-        <a href="#workflow" class="w-full sm:w-auto px-8 py-3.5 rounded-xl glass text-zinc-200 font-semibold hover:bg-zinc-800/80 transition">
-          Tìm hiểu quy trình
-        </a>
-      </div>
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs font-semibold mb-4">
+      <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+      Đang nâng cấp hệ thống
     </div>
-  </section>
 
-  <!-- Features Section -->
-  <section id="features" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass p-6 rounded-2xl transition duration-300">
-        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-4 font-bold text-lg">⚡</div>
-        <h3 class="text-lg font-bold mb-2">Tốc độ & Đúng hẹn</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">Cam kết bàn giao đúng deadline. Hỗ trợ các gói làm gấp cho những buổi thuyết trình sát giờ.</p>
-      </div>
-      <div class="glass p-6 rounded-2xl transition duration-300">
-        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 font-bold text-lg">🎨</div>
-        <h3 class="text-lg font-bold mb-2">Thiết kế độc bản</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">Mỗi bộ slide được phối màu, căn chỉnh bố cục và hiệu ứng chuyển cảnh (Morph) phù hợp với từng chủ đề.</p>
-      </div>
-      <div class="glass p-6 rounded-2xl transition duration-300">
-        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4 font-bold text-lg">💎</div>
-        <h3 class="text-lg font-bold mb-2">Chi phí tối ưu</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed">Mức giá cực kỳ thân thiện với học sinh, sinh viên cùng nhiều mã giảm giá hấp dẫn theo từng thời điểm.</p>
-      </div>
-    </div>
-  </section>
+    <h1 class="text-2xl sm:text-3xl font-extrabold leading-tight mb-3 bg-gradient-to-br from-white to-slate-300 bg-clip-text text-transparent">
+      Cùng gặp lại vào Tháng 12 nhé!
+    </h1>
 
-  <!-- Pricing Section (Render tự động từ klyro-config.js) -->
-  <section id="pricing" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="text-center mb-14">
-      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Bảng Giá Gói Thiết Kế</h2>
-      <p class="text-zinc-400 text-sm sm:text-base">Chọn gói dịch vụ phù hợp với nhu cầu của bạn. Nhập mã giảm giá ở bước thanh toán.</p>
-    </div>
-    <div id="pricing-container" class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-      <!-- Dữ liệu gói sẽ được JS tự động đổ vào đây -->
-    </div>
-  </section>
+    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed mb-7">
+      Klyro đang hoàn thiện những mảnh ghép cuối cùng để mang đến trải nghiệm thiết kế slide mượt mà nhất. Hẹn gặp lại bạn vào <strong class="text-zinc-200">Tháng 12/2026</strong>!
+    </p>
 
-  <!-- Workflow Section -->
-  <section id="workflow" class="py-16 px-4 sm:px-6 max-w-5xl mx-auto">
-    <div class="glass rounded-3xl p-8 sm:p-12">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-10">Quy Trình Đặt Hàng 4 Bước</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mx-auto mb-3">1</div>
-          <h4 class="font-bold mb-1">Chọn gói dịch vụ</h4>
-          <p class="text-xs text-zinc-400">Lựa chọn gói phù hợp với số lượng slide và yêu cầu.</p>
-        </div>
-        <div>
-          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mx-auto mb-3">2</div>
-          <h4 class="font-bold mb-1">Gửi nội dung & Thanh toán</h4>
-          <p class="text-xs text-zinc-400">Điền link tài liệu (Docs/Drive) và quét mã QR thanh toán.</p>
-        </div>
-        <div>
-          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mx-auto mb-3">3</div>
-          <h4 class="font-bold mb-1">Thiết kế & Duyệt bản nháp</h4>
-          <p class="text-xs text-zinc-400">Klyro tiến hành thiết kế và gửi bản xem trước để bạn góp ý.</p>
-        </div>
-        <div>
-          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center mx-auto mb-3">4</div>
-          <h4 class="font-bold mb-1">Bàn giao hoàn thiện</h4>
-          <p class="text-xs text-zinc-400">Nhận file gốc chất lượng cao qua Email hoặc Facebook.</p>
-        </div>
+    <div class="grid grid-cols-4 gap-2.5 mb-7">
+      <div class="bg-zinc-950/70 border border-white/10 rounded-2xl py-3 px-1">
+        <div id="cd-days" class="text-xl sm:text-2xl font-extrabold text-sky-400">00</div>
+        <div class="text-[11px] text-zinc-500 mt-0.5">Ngày</div>
+      </div>
+      <div class="bg-zinc-950/70 border border-white/10 rounded-2xl py-3 px-1">
+        <div id="cd-hours" class="text-xl sm:text-2xl font-extrabold text-indigo-400">00</div>
+        <div class="text-[11px] text-zinc-500 mt-0.5">Giờ</div>
+      </div>
+      <div class="bg-zinc-950/70 border border-white/10 rounded-2xl py-3 px-1">
+        <div id="cd-mins" class="text-xl sm:text-2xl font-extrabold text-purple-400">00</div>
+        <div class="text-[11px] text-zinc-500 mt-0.5">Phút</div>
+      </div>
+      <div class="bg-zinc-950/70 border border-white/10 rounded-2xl py-3 px-1">
+        <div id="cd-secs" class="text-xl sm:text-2xl font-extrabold text-pink-400">00</div>
+        <div class="text-[11px] text-zinc-500 mt-0.5">Giây</div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-zinc-800/80 py-10 px-4 sm:px-6 mt-12 text-sm text-zinc-400">
-    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-white">Klyro</span>
-        <span>•</span>
-        <a href="https://ww.klyro.gt.tc" class="hover:text-white transition">Thiết kế bởi Klyro</a>
-      </div>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a href="terms.html" class="hover:text-white transition">Điều khoản dịch vụ</a>
-        <a href="privacy.html" class="hover:text-white transition">Chính sách bảo mật</a>
-        <a href="refund.html" class="hover:text-white transition">Chính sách hoàn tiền</a>
-      </div>
+    <div class="text-xs sm:text-sm text-zinc-500">
+      Liên hệ hỗ trợ gấp: 
+      <a href="mailto:cskh.klyro@gmail.com" class="text-indigo-400 hover:text-indigo-300 font-semibold transition">cskh.klyro@gmail.com</a>
     </div>
-  </footer>
+  </div>
 
-  <script src="klyro-config.js"></script>
   <script>
-    const container = document.getElementById('pricing-container');
-    const formatVND = (num) => num.toLocaleString('vi-VN') + 'đ';
+    const TARGET_DATE = new Date("2026-12-01T00:00:00+07:00");
 
-    KLYRO_CONFIG.packages.forEach(pkg => {
-      const isPopular = pkg.popular;
-      const card = document.createElement('div');
-      card.className = `glass rounded-3xl p-7 flex flex-col justify-between transition duration-300 glow-card relative ${isPopular ? 'border-indigo-500/60 bg-zinc-900/90' : ''}`;
-      
-      card.innerHTML = `
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-semibold px-3 py-1 rounded-full ${isPopular ? 'bg-indigo-500 text-white' : 'bg-zinc-800 text-zinc-300'}">
-              ${pkg.badge}
-            </span>
-            <span class="text-xs text-zinc-500 line-through">${formatVND(pkg.originalPrice)}</span>
-          </div>
-          <h3 class="text-xl font-bold mb-2">${pkg.name}</h3>
-          <div class="text-3xl font-extrabold text-white mb-3">${formatVND(pkg.price)}</div>
-          <p class="text-zinc-400 text-sm mb-6">${pkg.description}</p>
-          <ul class="space-y-3 text-sm text-zinc-300 mb-8">
-            ${pkg.features.map(f => `<li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">✓</span><span>${f}</span></li>`).join('')}
-          </ul>
-        </div>
-        <a href="payment.html?pkg=${pkg.id}" class="w-full py-3 rounded-xl text-center font-semibold transition ${isPopular ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/25' : 'bg-zinc-800 hover:bg-zinc-700 text-white'}">
-          Chọn gói này
-        </a>
-      `;
-      container.appendChild(card);
-    });
+    function updateCountdown() {
+      const diff = Math.max(0, TARGET_DATE - new Date());
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
+      document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("cd-mins").textContent = String(mins).padStart(2, "0");
+      document.getElementById("cd-secs").textContent = String(secs).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
