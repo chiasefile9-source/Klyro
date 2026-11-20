@@ -98,7 +98,7 @@ const KLYRO_CONFIG = {
   // Mã giảm giá (chỉ để hiển thị nhanh trên web — Apps Script mới là nơi kiểm tra thật).
   giftcodes: {
     "KLYRO10": { discount: 10000, minOrder: 50000, desc: "Giảm 10.000đ cho đơn từ 50k" },
-    "QUINN": { discount: 10000000, minOrder: 250000, desc: "Giảm 10.0000.000đ cho đơn từ 25k" }
+    "QUINN": { discount: 10000000, minOrder: 25000, desc: "Giảm 10.0000.000đ cho đơn từ 25k" }
   },
 
   // Nhận xét thật của khách. Để [] thì mục này ẩn. Mỗi phần tử: { name: "Minh Anh", text: "...", role: "SV năm 2, ĐH ABC" }
