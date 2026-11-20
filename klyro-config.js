@@ -1,25 +1,36 @@
 // klyro-config.js
+// Ô nào để trống ("") thì mục đó tự ẩn trên website.
 const KLYRO_CONFIG = {
   brand: {
     name: "Klyro",
     domain: "https://ww.klyro.gt.tc",
-    email: "chiasefile9@gmail.com",
-    facebook: "https://www.facebook.com/klyro.2026", // Thay bằng link Fanpage Klyro của bạn
+    email: "cskh.klyro@gmail.com",       // email hỗ trợ hiển thị trên web
+    facebook: "https://www.facebook.com/klyro.2026", // link fanpage thật
+    phone: "",      // VD: "0901 234 567"  (để trống = ẩn)
+    zalo: "",       // VD: "0901234567"    (để trống = ẩn)
+    address: "",    // VD: "Quận 1, TP.HCM" (để trống = ẩn)
+    hours: "",      // VD: "8h - 21h hằng ngày" (để trống = ẩn)
     credit: "Thiết kế bởi Klyro"
   },
-  
-  // Link Web App từ Google Apps Script của bạn
+
+  // Link Web App của Google Apps Script (Deploy > Web app)
   apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
 
-  // Thông tin nhận thanh toán (Dùng để tạo VietQR tự động)
+  // Thông tin nhận thanh toán (VietQR).
+  // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".
+  // Khi có tài khoản ngân hàng thật: đổi enabled thành true, bankId là mã ngân hàng của VietQR
+  // (VD: MB, VCB, TCB, ACB, BIDV, TPB...), accountNo là số tài khoản, accountName là tên chủ TK (in hoa, không dấu).
+  // Lưu ý: "Zalopay" không phải mã ngân hàng của VietQR nên QR sẽ không quét được.
   payment: {
-    bankId: "Zalopay", // Mã ngân hàng (VD: MB, VCB, TCB, ACB, BIDV...)
-    accountNo: "99ZP26294M80657068", // Số tài khoản của bạn
-    accountName: "CHƯA HOÀN TẤT CHỨC NĂNG NÀY", // Tên chủ tài khoản (viết hoa không dấu)
+    enabled: false,
+    bankId: "",
+    accountNo: "",
+    accountName: "",
     template: "compact2"
   },
 
-  // Danh sách các gói dịch vụ thiết kế Slide (Đã cập nhật giá và biểu tượng mới)
+  // Danh sách các gói dịch vụ. Giá ở đây chỉ để HIỂN THỊ — giá tính tiền thật nằm ở Apps Script (Code.gs).
+  // Nếu đổi giá, nhớ đổi cả hai nơi.
   packages: [
     {
       id: "free",
@@ -45,7 +56,7 @@ const KLYRO_CONFIG = {
       description: "Phù hợp bài thuyết trình nhóm, báo cáo môn học cần sự gọn gàng, nghiêm túc.",
       features: [
         "Từ 10 - 15 slides bố cục chuẩn mực",
-        "Phối màu & font chữ đồng bộ chuyên nghiệp",
+        "Phối màu & font chữ đồng bộ",
         "Bàn giao file PowerPoint (.pptx) & PDF",
         "Hỗ trợ chỉnh sửa 2 lần miễn phí",
         "Thời gian giao: Nhanh nhất 1 ngày - Muộn nhất 3 ngày"
@@ -62,7 +73,7 @@ const KLYRO_CONFIG = {
       features: [
         "Từ 15 - 22 slides thiết kế sáng tạo, độc bản",
         "Hiệu ứng Morph & Animation chuyên sâu",
-        "Tặng kèm bộ icon & hình ảnh minh họa cao cấp",
+        "Tặng kèm bộ icon & hình ảnh minh họa",
         "Hỗ trợ chỉnh sửa 3 lần miễn phí",
         "Thời gian giao: 2 - 4 ngày"
       ]
@@ -72,7 +83,7 @@ const KLYRO_CONFIG = {
       name: "Gói Đồ Án / Cao Cấp (VIP)",
       price: 144000,
       originalPrice: 190000,
-      badge: "👑 Đỉnh cao chất lượng",
+      badge: "👑 Đầu tư chỉn chu",
       description: "Dành cho đồ án tốt nghiệp, bài thuyết trình quan trọng cần chiều sâu nội dung.",
       features: [
         "Từ 25 - 35 slides thiết kế cao cấp A-Z",
@@ -84,9 +95,12 @@ const KLYRO_CONFIG = {
     }
   ],
 
-  // Danh sách mã giảm giá (Giftcode)
+  // Mã giảm giá (chỉ để hiển thị nhanh trên web — Apps Script mới là nơi kiểm tra thật).
   giftcodes: {
     "KLYRO10": { discount: 10000, minOrder: 50000, desc: "Giảm 10.000đ cho đơn từ 50k" },
     "KLYRO20": { discount: 20000, minOrder: 100000, desc: "Giảm 20.000đ cho đơn từ 100k" }
-  }
+  },
+
+  // Nhận xét thật của khách. Để [] thì mục này ẩn. Mỗi phần tử: { name: "Minh Anh", text: "...", role: "SV năm 2, ĐH ABC" }
+  reviews: []
 };

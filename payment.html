@@ -3,107 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thanh Toán Đơn Hàng — Klyro</title>
+  <title>Đặt Slide — Klyro</title>
+  <meta name="robots" content="noindex">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; color: #fafafa; }
     .glass { background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Header -->
   <header class="glass border-b border-zinc-800/80">
     <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
+      <a href="index-main.html" class="flex items-center gap-2 font-bold text-lg">
         <span class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm">K</span>
-        <span>Klyro Checkout</span>
+        <span>Klyro</span>
       </a>
-      <a href="index.html" class="text-sm text-zinc-400 hover:text-white transition">← Quay lại trang chủ</a>
+      <a href="index-main.html" class="text-sm text-zinc-400 hover:text-white transition">← Quay lại trang chủ</a>
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="max-w-5xl mx-auto w-full px-4 py-10">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
-      <!-- Form thông tin khách hàng -->
+
       <div class="lg:col-span-7 glass p-6 sm:p-8 rounded-3xl">
         <h1 class="text-2xl font-extrabold mb-6">Thông Tin Đặt Thiết Kế</h1>
-        <form id="order-form" class="space-y-5">
+        <form id="order-form" class="space-y-5" novalidate>
           <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-1.5">Chọn gói dịch vụ *</label>
-            <select id="package-select" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
-              <!-- JS tự động nạp danh sách gói -->
-            </select>
+            <label for="package-select" class="block text-sm font-medium text-zinc-300 mb-1.5">Chọn gói dịch vụ *</label>
+            <select id="package-select" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500"></select>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-1.5">Tên của bạn *</label>
-              <input type="text" id="customer-name" required placeholder="VD: Minh Anh" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
+              <label for="customer-name" class="block text-sm font-medium text-zinc-300 mb-1.5">Tên của bạn *</label>
+              <input type="text" id="customer-name" required maxlength="100" autocomplete="name" placeholder="VD: Minh Anh" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
             </div>
             <div>
-              <label class="block text-sm font-medium text-zinc-300 mb-1.5">Email nhận file *</label>
-              <input type="email" id="customer-email" required placeholder="email@gmail.com" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
+              <label for="customer-email" class="block text-sm font-medium text-zinc-300 mb-1.5">Email nhận file *</label>
+              <input type="email" id="customer-email" required maxlength="120" autocomplete="email" placeholder="email@gmail.com" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-1.5">Link Facebook / Zalo liên hệ *</label>
-            <input type="text" id="customer-contact" required placeholder="https://facebook.com/... hoặc SĐT Zalo" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
+            <label for="customer-contact" class="block text-sm font-medium text-zinc-300 mb-1.5">Link Facebook / Zalo liên hệ *</label>
+            <input type="text" id="customer-contact" required maxlength="200" placeholder="https://facebook.com/... hoặc SĐT Zalo" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-1.5">Link tài liệu nội dung (Google Docs / Drive) *</label>
-            <input type="url" id="content-link" required placeholder="https://docs.google.com/..." class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
+            <label for="content-link" class="block text-sm font-medium text-zinc-300 mb-1.5">Link tài liệu nội dung (Google Docs / Drive) *</label>
+            <input type="url" id="content-link" required maxlength="500" placeholder="https://docs.google.com/..." class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
             <p class="text-xs text-zinc-500 mt-1">Lưu ý: Mở quyền "Bất kỳ ai có đường liên kết đều có thể xem".</p>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-1.5">Ghi chú thêm (Tone màu, phong cách, deadline...)</label>
-            <textarea id="customer-note" rows="3" placeholder="VD: Làm tone xanh dương tối giản, cần trước 20h tối mai..." class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500"></textarea>
+            <label for="customer-note" class="block text-sm font-medium text-zinc-300 mb-1.5">Ghi chú thêm (tone màu, phong cách, deadline...)</label>
+            <textarea id="customer-note" rows="3" maxlength="1000" placeholder="VD: Làm tone xanh dương tối giản, cần trước 20h tối mai..." class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500"></textarea>
           </div>
 
-          <!-- Mã giảm giá -->
-          <div>
-            <label class="block text-sm font-medium text-zinc-300 mb-1.5">Mã giảm giá (Giftcode)</label>
+          <div id="giftcode-wrap">
+            <label for="giftcode-input" class="block text-sm font-medium text-zinc-300 mb-1.5">Mã giảm giá (nếu có)</label>
             <div class="flex gap-2">
-              <input type="text" id="giftcode-input" placeholder="Nhập mã (VD: KLYRO10)" class="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm uppercase focus:outline-none focus:border-indigo-500">
+              <input type="text" id="giftcode-input" maxlength="30" placeholder="Nhập mã" class="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm uppercase focus:outline-none focus:border-indigo-500">
               <button type="button" id="apply-code-btn" class="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm font-semibold transition">Áp dụng</button>
             </div>
             <p id="giftcode-msg" class="text-xs mt-1.5 hidden"></p>
           </div>
 
-          <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold hover:opacity-90 transition shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2">
-            <span>Xác Nhận Đã Chuyển Khoản & Gửi Đơn</span>
-          </button>
+          <!-- Ô bẫy bot: người thật không nhìn thấy, để trống -->
+          <div class="hp" aria-hidden="true">
+            <label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <div id="form-error" class="hidden rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert"></div>
+
+          <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold hover:opacity-90 transition shadow-lg shadow-indigo-500/25 disabled:opacity-60">Gửi đơn</button>
+          <p class="text-xs text-zinc-500 text-center">Bằng việc gửi đơn, bạn đồng ý với <a href="terms.html" class="underline">Điều khoản</a> và <a href="privacy.html" class="underline">Chính sách bảo mật</a> của Klyro.</p>
         </form>
       </div>
 
-      <!-- Cột Thanh toán QR & Tóm tắt đơn hàng -->
       <div class="lg:col-span-5 space-y-6">
         <div class="glass p-6 rounded-3xl">
           <h2 class="text-lg font-bold mb-4">Tóm Tắt Đơn Hàng</h2>
           <div class="space-y-3 text-sm border-b border-zinc-800 pb-4 mb-4">
-            <div class="flex justify-between">
-              <span class="text-zinc-400">Mã đơn hàng:</span>
-              <span id="order-code" class="font-mono font-bold text-indigo-400">KLYRO-0000</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-zinc-400">Gói dịch vụ:</span>
-              <span id="summary-pkg-name" class="font-semibold">-</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-zinc-400">Giá gốc:</span>
-              <span id="summary-subtotal">0đ</span>
-            </div>
-            <div class="flex justify-between text-emerald-400">
-              <span>Giảm giá:</span>
-              <span id="summary-discount">-0đ</span>
-            </div>
+            <div class="flex justify-between items-center"><span class="text-zinc-400">Mã đơn hàng:</span><span class="flex items-center gap-2"><span id="order-code" class="font-mono font-bold text-indigo-400 text-lg tracking-widest select-all"></span><button type="button" id="copy-code" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold">Sao chép</button></span></div>
+            <div class="flex justify-between gap-3"><span class="text-zinc-400 shrink-0">Gói dịch vụ:</span><span id="summary-pkg-name" class="font-semibold text-right">-</span></div>
+            <div class="flex justify-between"><span class="text-zinc-400">Giá gốc:</span><span id="summary-subtotal">0đ</span></div>
+            <div class="flex justify-between text-emerald-400"><span>Giảm giá:</span><span id="summary-discount">-0đ</span></div>
           </div>
           <div class="flex justify-between items-center text-lg font-extrabold">
             <span>Tổng thanh toán:</span>
@@ -111,113 +100,150 @@
           </div>
         </div>
 
-        <!-- Khung QR VietQR -->
-        <div class="glass p-6 rounded-3xl text-center">
-          <h3 class="font-bold mb-1">Quét Mã QR Để Thanh Toán</h3>
-          <p class="text-xs text-zinc-400 mb-4">Hệ thống tự động điền số tiền và nội dung chuyển khoản</p>
-          <div class="bg-white p-3 rounded-2xl inline-block mb-4">
-            <img id="vietqr-img" src="" alt="Mã QR Thanh Toán" class="w-48 h-48 object-contain">
-          </div>
-          <div class="text-xs text-zinc-300 space-y-1 bg-zinc-900/80 p-3 rounded-xl border border-zinc-800">
-            <p>Ngân hàng: <strong id="bank-name" class="text-white"></strong></p>
-            <p>Số tài khoản: <strong id="bank-acc" class="text-white font-mono"></strong></p>
-            <p>Chủ tài khoản: <strong id="bank-owner" class="text-white"></strong></p>
-            <p>Nội dung CK: <strong id="transfer-note" class="text-amber-400 font-mono"></strong></p>
-          </div>
-        </div>
+        <!-- Khối thanh toán: nội dung thay đổi theo cấu hình -->
+        <div id="pay-box" class="glass p-6 rounded-3xl text-center"></div>
       </div>
-
     </div>
   </main>
 
-  <!-- Modal Thông báo thành công -->
-  <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50" role="dialog" aria-modal="true">
     <div class="glass max-w-md w-full p-8 rounded-3xl text-center border border-emerald-500/30">
-      <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
-      <h3 class="text-2xl font-extrabold mb-2">Đặt Hàng Thành Công!</h3>
-      <p class="text-sm text-zinc-300 mb-6 leading-relaxed">
-        Cảm ơn bạn đã tin tưởng <strong>Klyro</strong>. Đơn hàng <span id="modal-order-id" class="font-mono text-indigo-400 font-bold"></span> đã được ghi nhận. Chúng mình sẽ liên hệ xác nhận trong ít phút!
-      </p>
-      <a href="index.html" class="block w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-semibold transition">Về trang chủ</a>
+      <div id="modal-icon" class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl">✓</div>
+      <h3 id="modal-title" class="text-2xl font-extrabold mb-2">Đã Nhận Đơn!</h3>
+      <p class="text-sm text-zinc-300 mb-2">Mã đơn của bạn:</p>
+      <p id="modal-order-id" class="font-mono text-xl text-indigo-400 font-bold mb-4 select-all"></p>
+      <p id="modal-text" class="text-sm text-zinc-300 mb-6 leading-relaxed"></p>
+      <div class="flex flex-col gap-2.5">
+        <a id="modal-track" href="track.html" class="block w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-semibold transition">Tra cứu đơn này</a>
+        <a href="index-main.html" class="block w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 font-semibold transition">Về trang chủ</a>
+      </div>
     </div>
   </div>
 
   <script src="klyro-config.js"></script>
   <script>
-    const formatVND = (num) => num.toLocaleString('vi-VN') + 'đ';
-    const orderId = 'KLYRO' + Math.floor(1000 + Math.random() * 9000);
+    const CFG = KLYRO_CONFIG;
+    const $ = (id) => document.getElementById(id);
+    const formatVND = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+
+    // Mã đơn khó đoán: KL + 5 ký tự ngẫu nhiên (bỏ các ký tự dễ nhầm I, O, 0, 1)
+    function makeOrderId() {
+      const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const bytes = new Uint8Array(5);
+      crypto.getRandomValues(bytes);
+      return 'KL' + Array.from(bytes, (b) => alphabet[b % alphabet.length]).join('');
+    }
+    const orderId = makeOrderId();
+
     let currentDiscount = 0;
     let appliedCode = '';
+    let submitted = false;
 
-    // Khởi tạo giao diện
-    const pkgSelect = document.getElementById('package-select');
-    const urlParams = new URLSearchParams(window.location.search);
-    const defaultPkg = urlParams.get('pkg') || 'pro';
-
-    KLYRO_CONFIG.packages.forEach(p => {
+    const pkgSelect = $('package-select');
+    CFG.packages.forEach((p) => {
       const opt = document.createElement('option');
       opt.value = p.id;
-      opt.textContent = `${p.name} — ${formatVND(p.price)}`;
-      if (p.id === defaultPkg) opt.selected = true;
+      opt.textContent = p.name + ' — ' + (p.price === 0 ? 'Miễn phí' : formatVND(p.price));
       pkgSelect.appendChild(opt);
     });
+    const wanted = new URLSearchParams(location.search).get('pkg');
+    pkgSelect.value = CFG.packages.some((p) => p.id === wanted) ? wanted : (CFG.packages.find((p) => p.popular) || CFG.packages[0]).id;
 
-    document.getElementById('order-code').textContent = orderId;
-    document.getElementById('bank-name').textContent = KLYRO_CONFIG.payment.bankId;
-    document.getElementById('bank-acc').textContent = KLYRO_CONFIG.payment.accountNo;
-    document.getElementById('bank-owner').textContent = KLYRO_CONFIG.payment.accountName;
-    document.getElementById('transfer-note').textContent = orderId;
+    $('order-code').textContent = orderId;
+    $('copy-code').addEventListener('click', async (e) => {
+      try { await navigator.clipboard.writeText(orderId); e.target.textContent = 'Đã chép ✓'; }
+      catch (_) { e.target.textContent = 'Hãy chép tay'; }
+      setTimeout(() => { e.target.textContent = 'Sao chép'; }, 1800);
+    });
 
-    function updateOrderSummary() {
-      const selectedPkg = KLYRO_CONFIG.packages.find(p => p.id === pkgSelect.value);
-      
-      if (appliedCode && KLYRO_CONFIG.giftcodes[appliedCode]) {
-        const promo = KLYRO_CONFIG.giftcodes[appliedCode];
-        if (selectedPkg.price < promo.minOrder) {
-          currentDiscount = 0;
-          appliedCode = '';
-          showMsg(`Mã này chỉ áp dụng cho đơn từ ${formatVND(promo.minOrder)}`, 'text-amber-400');
-        }
-      }
-
-      const finalTotal = Math.max(0, selectedPkg.price - currentDiscount);
-      
-      document.getElementById('summary-pkg-name').textContent = selectedPkg.name;
-      document.getElementById('summary-subtotal').textContent = formatVND(selectedPkg.price);
-      document.getElementById('summary-discount').textContent = `-${formatVND(currentDiscount)}`;
-      document.getElementById('summary-total').textContent = formatVND(finalTotal);
-
-      const { bankId, accountNo, accountName, template } = KLYRO_CONFIG.payment;
-      const qrUrl = `https://img.vietqr.io/image/${bankId}-${accountNo}-${template}.png?amount=${finalTotal}&addInfo=${orderId}&accountName=${encodeURIComponent(accountName)}`;
-      document.getElementById('vietqr-img').src = qrUrl;
-    }
+    const getPkg = () => CFG.packages.find((p) => p.id === pkgSelect.value);
+    const payEnabled = Boolean(CFG.payment && CFG.payment.enabled && CFG.payment.bankId && CFG.payment.accountNo);
 
     function showMsg(text, colorClass) {
-      const msgEl = document.getElementById('giftcode-msg');
-      msgEl.textContent = text;
-      msgEl.className = `text-xs mt-1.5 ${colorClass}`;
-      msgEl.classList.remove('hidden');
+      const el = $('giftcode-msg');
+      el.textContent = text;
+      el.className = 'text-xs mt-1.5 ' + colorClass;
     }
 
-    document.getElementById('apply-code-btn').addEventListener('click', () => {
-      const code = document.getElementById('giftcode-input').value.trim().toUpperCase();
-      const selectedPkg = KLYRO_CONFIG.packages.find(p => p.id === pkgSelect.value);
+    function renderPayBox(total) {
+      const box = $('pay-box');
+      box.replaceChildren();
+      const add = (tag, cls, text) => { const el = document.createElement(tag); el.className = cls; el.textContent = text; box.appendChild(el); return el; };
 
+      if (total === 0) {
+        add('h3', 'font-bold mb-1', 'Đơn này không cần thanh toán');
+        add('p', 'text-xs text-zinc-400', 'Bạn chỉ cần điền thông tin và gửi đơn. Klyro sẽ liên hệ khi bắt đầu làm.');
+        return;
+      }
+      if (!payEnabled) {
+        add('h3', 'font-bold mb-1', 'Thanh toán sau khi gửi đơn');
+        add('p', 'text-xs text-zinc-400 leading-relaxed', 'Sau khi nhận đơn, Klyro sẽ gửi thông tin thanh toán qua email / Facebook / Zalo bạn đã nhập. Vui lòng chưa chuyển khoản trước khi nhận được thông tin đó.');
+        return;
+      }
+
+      const { bankId, accountNo, accountName, template } = CFG.payment;
+      add('h3', 'font-bold mb-1', 'Quét mã QR để thanh toán');
+      add('p', 'text-xs text-zinc-400 mb-4', 'Mã đã điền sẵn số tiền và nội dung chuyển khoản.');
+      const wrap = document.createElement('div');
+      wrap.className = 'bg-white p-3 rounded-2xl inline-block mb-4';
+      const img = document.createElement('img');
+      img.alt = 'Mã QR thanh toán';
+      img.className = 'w-48 h-48 object-contain';
+      img.src = 'https://img.vietqr.io/image/' + encodeURIComponent(bankId) + '-' + encodeURIComponent(accountNo) + '-' + encodeURIComponent(template || 'compact2') +
+        '.png?amount=' + total + '&addInfo=' + encodeURIComponent(orderId) + '&accountName=' + encodeURIComponent(accountName || '');
+      img.onerror = () => { wrap.style.display = 'none'; };
+      wrap.appendChild(img);
+      box.appendChild(wrap);
+
+      const info = document.createElement('div');
+      info.className = 'text-xs text-zinc-300 space-y-1 bg-zinc-900/80 p-3 rounded-xl border border-zinc-800';
+      [['Ngân hàng', bankId], ['Số tài khoản', accountNo], ['Chủ tài khoản', accountName], ['Nội dung CK', orderId]].forEach(([k, v]) => {
+        if (!v) return;
+        const p = document.createElement('p');
+        p.append(k + ': ');
+        const s = document.createElement('strong');
+        s.className = 'text-white font-mono';
+        s.textContent = v;
+        p.appendChild(s);
+        info.appendChild(p);
+      });
+      box.appendChild(info);
+    }
+
+    function updateOrderSummary() {
+      const pkg = getPkg();
+
+      // Mã giảm giá không dùng cho gói miễn phí hoặc đơn chưa đủ tối thiểu
+      if (appliedCode && CFG.giftcodes[appliedCode] && pkg.price < CFG.giftcodes[appliedCode].minOrder) {
+        currentDiscount = 0;
+        appliedCode = '';
+        showMsg('Mã giảm giá đã được gỡ vì gói này chưa đủ điều kiện áp dụng.', 'text-amber-400');
+      }
+      $('giftcode-wrap').style.display = pkg.price === 0 ? 'none' : '';
+
+      const total = Math.max(0, pkg.price - currentDiscount);
+      $('summary-pkg-name').textContent = pkg.name;
+      $('summary-subtotal').textContent = formatVND(pkg.price);
+      $('summary-discount').textContent = '-' + formatVND(currentDiscount);
+      $('summary-total').textContent = formatVND(total);
+      $('submit-btn').textContent = total === 0 ? 'Gửi đơn miễn phí' : 'Gửi đơn đặt hàng';
+      renderPayBox(total);
+    }
+
+    $('apply-code-btn').addEventListener('click', () => {
+      const code = $('giftcode-input').value.trim().toUpperCase();
+      const pkg = getPkg();
       if (!code) return;
-      const promo = KLYRO_CONFIG.giftcodes[code];
-
+      const promo = CFG.giftcodes[code];
       if (!promo) {
-        currentDiscount = 0;
-        appliedCode = '';
+        currentDiscount = 0; appliedCode = '';
         showMsg('Mã giảm giá không tồn tại hoặc đã hết hạn.', 'text-rose-400');
-      } else if (selectedPkg.price < promo.minOrder) {
-        currentDiscount = 0;
-        appliedCode = '';
-        showMsg(`Mã ${code} yêu cầu đơn hàng tối thiểu ${formatVND(promo.minOrder)}.`, 'text-amber-400');
+      } else if (pkg.price < promo.minOrder) {
+        currentDiscount = 0; appliedCode = '';
+        showMsg('Mã ' + code + ' yêu cầu đơn tối thiểu ' + formatVND(promo.minOrder) + '.', 'text-amber-400');
       } else {
-        currentDiscount = promo.discount;
-        appliedCode = code;
-        showMsg(`Áp dụng thành công: ${promo.desc}`, 'text-emerald-400');
+        currentDiscount = promo.discount; appliedCode = code;
+        showMsg('Áp dụng thành công: ' + promo.desc, 'text-emerald-400');
       }
       updateOrderSummary();
     });
@@ -225,45 +251,83 @@
     pkgSelect.addEventListener('change', updateOrderSummary);
     updateOrderSummary();
 
-    // Xử lý gửi Form đơn hàng qua URLSearchParams kết nối Google Apps Script
-    document.getElementById('order-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.innerHTML = `<span class="animate-spin">⏳</span> Đang gửi đơn hàng...`;
+    function showError(text) {
+      const el = $('form-error');
+      el.textContent = text;
+      el.classList.remove('hidden');
+    }
 
-      const selectedPkg = KLYRO_CONFIG.packages.find(p => p.id === pkgSelect.value);
-      
-      const formData = new URLSearchParams();
-      formData.append('orderId', orderId);
-      formData.append('packageName', selectedPkg.name);
-      formData.append('totalAmount', Math.max(0, selectedPkg.price - currentDiscount));
-      formData.append('giftcode', appliedCode || "Không có");
-      formData.append('customerName', document.getElementById('customer-name').value.trim());
-      formData.append('customerEmail', document.getElementById('customer-email').value.trim());
-      formData.append('customerContact', document.getElementById('customer-contact').value.trim());
-      formData.append('contentLink', document.getElementById('content-link').value.trim());
-      formData.append('note', document.getElementById('customer-note').value.trim());
+    function openModal(kind, title, text) {
+      $('modal-order-id').textContent = orderId;
+      $('modal-title').textContent = title;
+      $('modal-text').textContent = text;
+      $('modal-track').href = 'track.html?id=' + encodeURIComponent(orderId);
+      const icon = $('modal-icon');
+      icon.textContent = kind === 'ok' ? '✓' : '!';
+      icon.className = 'w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl ' +
+        (kind === 'ok' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400');
+      $('success-modal').classList.remove('hidden');
+      $('success-modal').classList.add('flex');
+    }
+
+    $('order-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $('form-error').classList.add('hidden');
+      if (submitted) return;
+
+      const pkg = getPkg();
+      const name = $('customer-name').value.trim();
+      const email = $('customer-email').value.trim();
+      const contact = $('customer-contact').value.trim();
+      const link = $('content-link').value.trim();
+
+      if (!name) return showError('Vui lòng nhập tên của bạn.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('Email chưa đúng định dạng.');
+      if (contact.length < 3) return showError('Vui lòng nhập link Facebook hoặc số Zalo để Klyro liên hệ.');
+      if (!/^https?:\/\/\S+$/i.test(link)) return showError('Link tài liệu phải bắt đầu bằng http:// hoặc https://');
+      if (!CFG.apiEndpoint || !CFG.apiEndpoint.startsWith('http')) return showError('Website chưa được kết nối. Vui lòng liên hệ hỗ trợ.');
+
+      const btn = $('submit-btn');
+      const oldLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Đang gửi đơn...';
+
+      // Chỉ gửi "gói nào" + "mã nào"; số tiền do server tự tính
+      const body = new URLSearchParams({
+        orderId,
+        packageId: pkg.id,
+        giftcode: appliedCode,
+        customerName: name,
+        customerEmail: email,
+        customerContact: contact,
+        contentLink: link,
+        note: $('customer-note').value.trim(),
+        website: $('website').value
+      });
 
       try {
-        if (!KLYRO_CONFIG.apiEndpoint || !KLYRO_CONFIG.apiEndpoint.startsWith('http')) {
-          throw new Error("Chưa cấu hình link Web App trong klyro-config.js");
+        const res = await fetch(CFG.apiEndpoint, { method: 'POST', body });
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          submitted = true;
+          const total = Math.max(0, pkg.price - currentDiscount);
+          let text;
+          if (total === 0) text = 'Đơn miễn phí của bạn đã được duyệt. Klyro sẽ liên hệ khi bắt đầu làm. Hãy lưu lại mã đơn và email để tra cứu tiến độ.';
+          else if (payEnabled) text = 'Vui lòng chuyển khoản đúng số tiền, nội dung chuyển khoản chỉ ghi mã đơn ở trên (nếu lỡ ghi sai, bạn không cần lo: Klyro sẽ đối chiếu theo số tiền và thời gian, và liên hệ lại qua email). Klyro sẽ xác nhận sau khi nhận được tiền.';
+          else text = 'Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập. Vui lòng chưa chuyển khoản trước khi nhận được thông tin đó. Hãy lưu lại mã đơn và email để tra cứu.';
+          openModal('ok', 'Đã Nhận Đơn!', text);
+        } else {
+          showError(data.message || 'Không gửi được đơn, vui lòng thử lại.');
+          btn.disabled = false;
+          btn.textContent = oldLabel;
         }
-
-        await fetch(KLYRO_CONFIG.apiEndpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: formData
-        });
-
-        document.getElementById('modal-order-id').textContent = orderId;
-        document.getElementById('success-modal').classList.remove('hidden');
-        document.getElementById('success-modal').classList.add('flex');
       } catch (err) {
-        alert('Lỗi gửi đơn: ' + err.message + '. Vui lòng kiểm tra lại cấu hình!');
-      } finally {
+        // Có thể đơn đã tới server nhưng trình duyệt không đọc được phản hồi -> không báo thất bại vội.
+        // Server nhận ra mã đơn trùng nên bấm gửi lại là an toàn, hoặc tra cứu bằng mã đơn.
+        showError('Không xác nhận được kết quả gửi đơn (có thể do mạng). Hãy thử bấm "Gửi đơn" lại một lần — hệ thống sẽ không tạo đơn trùng. Mã đơn của bạn: ' + orderId);
         btn.disabled = false;
-        btn.innerHTML = `<span>Xác Nhận Đã Chuyển Khoản & Gửi Đơn</span>`;
+        btn.textContent = oldLabel;
       }
     });
   </script>

@@ -77,6 +77,7 @@
 
     function updateCountdown() {
       const diff = Math.max(0, TARGET_DATE - new Date());
+      if (diff === 0) { location.replace("index-main.html"); return; }
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const mins = Math.floor((diff / (1000 * 60)) % 60);
