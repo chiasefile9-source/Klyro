@@ -6,15 +6,15 @@ const KLYRO_CONFIG = {
     domain: "https://ww.klyro.gt.tc",
     email: "cskh.klyro@gmail.com",       // email hỗ trợ hiển thị trên web
     facebook: "https://www.facebook.com/klyro.2026", // link fanpage thật
-    phone: "",      // VD: "0901 234 567"  (để trống = ẩn)
-    zalo: "",       // VD: "0901234567"    (để trống = ẩn)
-    address: "",    // VD: "Quận 1, TP.HCM" (để trống = ẩn)
-    hours: "",      // VD: "8h - 21h hằng ngày" (để trống = ẩn)
+    phone: "",      // VD: ""  (để trống = ẩn)
+    zalo: "",       // VD: ""    (để trống = ẩn)
+    address: "",    // VD: "" (để trống = ẩn)
+    hours: "",      // VD: "10h - 21h hằng ngày" (để trống = ẩn)
     credit: "Thiết kế bởi Klyro"
   },
 
   // Link Web App của Google Apps Script (Deploy > Web app)
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbxAalJOnpzy8aNOQEIZ6oIF751wjldQ_cc24v7zbufHhjso2cHF1Y_6Uw_xyKB-6yDN/exec",
 
   // Thông tin nhận thanh toán (VietQR).
   // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".
