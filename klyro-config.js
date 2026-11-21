@@ -14,7 +14,7 @@ const KLYRO_CONFIG = {
   },
 
   // Link Web App của Google Apps Script (Deploy > Web app)
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbxr_lyZEizvrOawon5uhLfvLQNLTlv7uULHakBIsY55ciNeLNwke_PeNKWE0L9Kc_gF/exec",
 
   // Thông tin nhận thanh toán (VietQR).
   // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".
