@@ -213,12 +213,8 @@
     function updateOrderSummary() {
       const pkg = getPkg();
 
-      // Mã giảm giá không dùng cho gói miễn phí hoặc đơn chưa đủ tối thiểu
-      if (appliedCode && CFG.giftcodes[appliedCode] && pkg.price < CFG.giftcodes[appliedCode].minOrder) {
-        currentDiscount = 0;
-        appliedCode = '';
-        showMsg('Mã giảm giá đã được gỡ vì gói này chưa đủ điều kiện áp dụng.', 'text-amber-400');
-      }
+      // Gói miễn phí không dùng mã giảm giá
+      if (pkg.price === 0 && appliedCode) { currentDiscount = 0; appliedCode = ''; }
       $('giftcode-wrap').style.display = pkg.price === 0 ? 'none' : '';
 
       const total = Math.max(0, pkg.price - currentDiscount);
@@ -230,25 +226,38 @@
       renderPayBox(total);
     }
 
-    $('apply-code-btn').addEventListener('click', () => {
-      const code = $('giftcode-input').value.trim().toUpperCase();
+    // Kiểm tra mã trực tiếp trên hệ thống Klyro (mã mới tạo dùng được ngay)
+    async function applyCode(code, silent) {
       const pkg = getPkg();
-      if (!code) return;
-      const promo = CFG.giftcodes[code];
-      if (!promo) {
-        currentDiscount = 0; appliedCode = '';
-        showMsg('Mã giảm giá không tồn tại hoặc đã hết hạn.', 'text-rose-400');
-      } else if (pkg.price < promo.minOrder) {
-        currentDiscount = 0; appliedCode = '';
-        showMsg('Mã ' + code + ' yêu cầu đơn tối thiểu ' + formatVND(promo.minOrder) + '.', 'text-amber-400');
-      } else {
-        currentDiscount = promo.discount; appliedCode = code;
-        showMsg('Áp dụng thành công: ' + promo.desc, 'text-emerald-400');
+      if (!code || pkg.price === 0) return;
+      const btn = $('apply-code-btn');
+      btn.disabled = true;
+      try {
+        const url = CFG.apiEndpoint + '?action=checkCode&code=' + encodeURIComponent(code) + '&packageId=' + encodeURIComponent(pkg.id);
+        const data = await (await fetch(url)).json();
+        if (data.status === 'ok') {
+          currentDiscount = data.discount; appliedCode = data.code;
+          showMsg('Áp dụng thành công: ' + data.desc + ' (-' + formatVND(data.discount) + ')', 'text-emerald-400');
+        } else {
+          currentDiscount = 0; appliedCode = '';
+          showMsg(data.message || 'Mã giảm giá không hợp lệ.', silent ? 'text-amber-400' : 'text-rose-400');
+        }
+      } catch (err) {
+        if (!silent) showMsg('Chưa kiểm tra được mã, vui lòng thử lại.', 'text-amber-400');
+      } finally {
+        btn.disabled = false;
+        updateOrderSummary();
       }
-      updateOrderSummary();
-    });
+    }
 
-    pkgSelect.addEventListener('change', updateOrderSummary);
+    $('apply-code-btn').addEventListener('click', () => applyCode($('giftcode-input').value.trim().toUpperCase(), false));
+
+    pkgSelect.addEventListener('change', () => {
+      const keep = appliedCode;
+      currentDiscount = 0;
+      updateOrderSummary();
+      if (keep) applyCode(keep, true);
+    });
     updateOrderSummary();
 
     function showError(text) {

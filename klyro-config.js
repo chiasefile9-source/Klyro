@@ -6,15 +6,15 @@ const KLYRO_CONFIG = {
     domain: "https://ww.klyro.gt.tc",
     email: "cskh.klyro@gmail.com",       // email hỗ trợ hiển thị trên web
     facebook: "https://www.facebook.com/klyro.2026", // link fanpage thật
-    phone: "",      // VD: ""  (để trống = ẩn)
-    zalo: "",       // VD: ""    (để trống = ẩn)
-    address: "",    // VD: "" (để trống = ẩn)
-    hours: "",      // VD: "10h - 21h hằng ngày" (để trống = ẩn)
+    phone: "",      // VD: "0901 234 567"  (để trống = ẩn)
+    zalo: "",       // VD: "0901234567"    (để trống = ẩn)
+    address: "",    // VD: "Quận 1, TP.HCM" (để trống = ẩn)
+    hours: "",      // VD: "8h - 21h hằng ngày" (để trống = ẩn)
     credit: "Thiết kế bởi Klyro"
   },
 
   // Link Web App của Google Apps Script (Deploy > Web app)
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbyT2GddBaQF96NxwM1Z09WzCRmDK5tegIZm3v9TNmyS5Fwk8ySglIfnPh8L6VHs19sk/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
 
   // Thông tin nhận thanh toán (VietQR).
   // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".
@@ -95,11 +95,7 @@ const KLYRO_CONFIG = {
     }
   ],
 
-  // Mã giảm giá (chỉ để hiển thị nhanh trên web — Apps Script mới là nơi kiểm tra thật).
-  giftcodes: {
-    "KLYRO10": { discount: 10000, minOrder: 50000, desc: "Giảm 10.000đ cho đơn từ 50k" },
-    "QUINN": { discount: 10000000, minOrder: 25000, desc: "Giảm 10.0000.000đ cho đơn từ 25k" }
-  },
+  // Mã giảm giá được tạo và quản lý tại trang admin-codes.html (lưu trên Google Sheet), không khai báo ở đây nữa.
 
   // Nhận xét thật của khách. Để [] thì mục này ẩn. Mỗi phần tử: { name: "Minh Anh", text: "...", role: "SV năm 2, ĐH ABC" }
   reviews: []

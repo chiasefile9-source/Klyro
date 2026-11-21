@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý mã giảm giá — Klyro</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; color: #fafafa; }
+    .glass { background: rgba(24, 24, 27, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    input, select { color-scheme: dark; }
+  </style>
+</head>
+<body class="antialiased min-h-screen">
+
+  <header class="glass border-b border-zinc-800/80">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2 font-bold text-lg">
+        <span class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm">K</span>
+        <span>Klyro · Mã giảm giá</span>
+      </div>
+      <button id="logout-btn" class="hidden text-sm text-zinc-400 hover:text-white">Đăng xuất</button>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+
+    <!-- Đăng nhập -->
+    <section id="login-card" class="glass rounded-3xl p-6 sm:p-8 max-w-md mx-auto">
+      <h1 class="text-xl font-extrabold mb-1">Đăng nhập quản trị</h1>
+      <p class="text-sm text-zinc-400 mb-5">Nhập khoá quản trị (ADMIN_KEY) bạn đã đặt trong Apps Script. Khoá chỉ nằm trong bộ nhớ trang này và biến mất khi đóng tab.</p>
+      <form id="login-form" class="space-y-4">
+        <input id="admin-key" type="password" autocomplete="current-password" placeholder="Khoá quản trị" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500">
+        <button id="login-btn" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 font-bold hover:opacity-90 transition">Đăng nhập</button>
+      </form>
+      <p id="login-err" class="hidden mt-3 text-sm text-rose-300"></p>
+    </section>
+
+    <!-- Bảng điều khiển -->
+    <div id="panel" class="hidden space-y-6">
+
+      <section class="glass rounded-3xl p-6 sm:p-8">
+        <h2 class="text-lg font-extrabold mb-1">Tạo mã mới</h2>
+        <p class="text-sm text-zinc-400 mb-5">Tạo xong là mã dùng được ngay trên website Klyro, không cần sửa code hay upload lại.</p>
+        <form id="create-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4" novalidate>
+          <div class="sm:col-span-2">
+            <label for="f-code" class="block text-sm text-zinc-300 mb-1.5">Mã (chữ hoa + số, 3-20 ký tự)</label>
+            <div class="flex gap-2">
+              <input id="f-code" maxlength="20" placeholder="VD: HOCKY20" class="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm uppercase font-mono focus:outline-none focus:border-indigo-500">
+              <button type="button" id="rand-btn" class="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm font-semibold">Ngẫu nhiên</button>
+            </div>
+          </div>
+          <div>
+            <label for="f-type" class="block text-sm text-zinc-300 mb-1.5">Kiểu giảm</label>
+            <select id="f-type" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm">
+              <option value="vnd">Giảm số tiền cố định (đ)</option>
+              <option value="percent">Giảm theo phần trăm (%)</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-value" id="f-value-label" class="block text-sm text-zinc-300 mb-1.5">Số tiền giảm (đ)</label>
+            <input id="f-value" type="number" min="1" placeholder="10000" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="f-min" class="block text-sm text-zinc-300 mb-1.5">Đơn tối thiểu (đ, 0 = không yêu cầu)</label>
+            <input id="f-min" type="number" min="0" value="0" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="f-max" class="block text-sm text-zinc-300 mb-1.5">Số lượt dùng tối đa (0 = không giới hạn)</label>
+            <input id="f-max" type="number" min="0" value="0" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="f-exp" class="block text-sm text-zinc-300 mb-1.5">Hạn dùng (để trống = không hết hạn)</label>
+            <input id="f-exp" type="date" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <div>
+            <label for="f-note" class="block text-sm text-zinc-300 mb-1.5">Ghi chú nội bộ</label>
+            <input id="f-note" maxlength="200" placeholder="VD: tặng nhóm lớp K22" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-indigo-500">
+          </div>
+          <div class="sm:col-span-2">
+            <button id="create-btn" type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 font-bold hover:opacity-90 transition">Tạo mã</button>
+            <p id="create-msg" class="hidden mt-3 text-sm"></p>
+          </div>
+        </form>
+      </section>
+
+      <section class="glass rounded-3xl p-6 sm:p-8">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <h2 class="text-lg font-extrabold">Danh sách mã</h2>
+          <button id="refresh-btn" class="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm font-semibold">Tải lại</button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs text-zinc-400 border-b border-zinc-800">
+              <tr>
+                <th class="py-2 pr-3">Mã</th><th class="py-2 pr-3">Giảm</th><th class="py-2 pr-3">Tối thiểu</th>
+                <th class="py-2 pr-3">Đã dùng</th><th class="py-2 pr-3">Hạn</th><th class="py-2 pr-3">Trạng thái</th><th class="py-2"></th>
+              </tr>
+            </thead>
+            <tbody id="code-rows"></tbody>
+          </table>
+        </div>
+        <p id="empty-msg" class="hidden text-sm text-zinc-400 py-4">Chưa có mã nào.</p>
+      </section>
+
+      <section class="glass rounded-3xl p-6 sm:p-8">
+        <h2 class="text-lg font-extrabold mb-1">Dùng thử mã</h2>
+        <p class="text-sm text-zinc-400 mb-4">Kiểm tra đúng như khách hàng sẽ thấy trên website.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <select id="t-pkg" class="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm"></select>
+          <input id="t-code" placeholder="Nhập mã" class="bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm uppercase font-mono focus:outline-none focus:border-indigo-500">
+          <button id="t-btn" class="py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-sm font-semibold">Kiểm tra</button>
+        </div>
+        <p id="t-msg" class="hidden mt-3 text-sm"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="klyro-config.js"></script>
+  <script>
+    const API = KLYRO_CONFIG.apiEndpoint;
+    const $ = (id) => document.getElementById(id);
+    const fmt = (n) => Number(n || 0).toLocaleString('vi-VN');
+    let adminKey = '';   // chỉ giữ trong bộ nhớ, không lưu vào trình duyệt
+
+    function setMsg(el, text, kind) {
+      el.textContent = text;
+      el.className = 'mt-3 text-sm ' + (kind === 'ok' ? 'text-emerald-300' : kind === 'warn' ? 'text-amber-300' : 'text-rose-300');
+    }
+
+    async function call(params) {
+      const body = new URLSearchParams(Object.assign({ adminKey }, params));
+      const res = await fetch(API, { method: 'POST', body });
+      return res.json();
+    }
+
+    /* ---- Đăng nhập ---- */
+    $('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const key = $('admin-key').value;
+      if (!key) return;
+      adminKey = key;
+      $('login-btn').disabled = true;
+      $('login-btn').textContent = 'Đang kiểm tra...';
+      try {
+        const data = await call({ action: 'adminList' });
+        if (data.status === 'ok') {
+          $('login-card').classList.add('hidden');
+          $('panel').classList.remove('hidden');
+          $('logout-btn').classList.remove('hidden');
+          renderRows(data.codes);
+        } else {
+          adminKey = '';
+          setMsg($('login-err'), data.message || 'Không đăng nhập được.', 'err');
+        }
+      } catch (err) {
+        adminKey = '';
+        setMsg($('login-err'), 'Không kết nối được tới hệ thống. Kiểm tra mạng và link kết nối.', 'err');
+      } finally {
+        $('login-btn').disabled = false;
+        $('login-btn').textContent = 'Đăng nhập';
+      }
+    });
+    $('logout-btn').addEventListener('click', () => location.reload());
+
+    /* ---- Danh sách ---- */
+    function cell(text, cls) {
+      const td = document.createElement('td');
+      td.className = 'py-2.5 pr-3 ' + (cls || '');
+      td.textContent = text;
+      return td;
+    }
+    function actionBtn(label, cls, handler) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold ' + cls;
+      b.textContent = label;
+      b.addEventListener('click', handler);
+      return b;
+    }
+
+    function renderRows(codes) {
+      const tbody = $('code-rows');
+      tbody.replaceChildren();
+      $('empty-msg').classList.toggle('hidden', codes.length > 0);
+      codes.slice().reverse().forEach((c) => {
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-zinc-800/60';
+        const giam = c.type === 'percent' ? c.value + '%' : fmt(c.value) + 'đ';
+        const used = c.used + (c.maxUses > 0 ? ' / ' + c.maxUses : ' / ∞');
+        const expired = c.expires && new Date() > new Date(c.expires + 'T23:59:59+07:00');
+        const full = c.maxUses > 0 && c.used >= c.maxUses;
+        let status = 'Đang bật', statusCls = 'text-emerald-400';
+        if (!c.active) { status = 'Đã tắt'; statusCls = 'text-zinc-400'; }
+        else if (expired) { status = 'Hết hạn'; statusCls = 'text-amber-400'; }
+        else if (full) { status = 'Hết lượt'; statusCls = 'text-amber-400'; }
+
+        tr.append(
+          cell(c.code, 'font-mono font-bold text-indigo-300'),
+          cell(giam),
+          cell(c.minOrder ? fmt(c.minOrder) + 'đ' : '—'),
+          cell(used),
+          cell(c.expires || '—'),
+          cell(status, 'font-semibold ' + statusCls)
+        );
+        const td = document.createElement('td');
+        td.className = 'py-2.5 flex flex-wrap gap-1.5 justify-end';
+        td.append(
+          actionBtn('Chép', 'bg-zinc-800 hover:bg-zinc-700', async (ev) => {
+            try { await navigator.clipboard.writeText(c.code); ev.target.textContent = 'Đã chép'; } catch (_) { ev.target.textContent = 'Chép tay'; }
+            setTimeout(() => { ev.target.textContent = 'Chép'; }, 1500);
+          }),
+          actionBtn(c.active ? 'Tắt' : 'Bật', 'bg-zinc-800 hover:bg-zinc-700', async () => {
+            const d = await call({ action: 'adminToggle', code: c.code });
+            if (d.status === 'ok') refresh(); else alert(d.message || 'Lỗi');
+          }),
+          actionBtn('Xoá', 'bg-rose-500/20 text-rose-300 hover:bg-rose-500/30', async () => {
+            if (!confirm('Xoá mã ' + c.code + '? Hành động này không hoàn tác.')) return;
+            const d = await call({ action: 'adminDelete', code: c.code });
+            if (d.status === 'ok') refresh(); else alert(d.message || 'Lỗi');
+          })
+        );
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function refresh() {
+      try {
+        const data = await call({ action: 'adminList' });
+        if (data.status === 'ok') renderRows(data.codes); else alert(data.message || 'Không tải được danh sách.');
+      } catch (err) { alert('Không kết nối được.'); }
+    }
+    $('refresh-btn').addEventListener('click', refresh);
+
+    /* ---- Tạo mã ---- */
+    $('f-type').addEventListener('change', () => {
+      const pct = $('f-type').value === 'percent';
+      $('f-value-label').textContent = pct ? 'Phần trăm giảm (1-100)' : 'Số tiền giảm (đ)';
+      $('f-value').placeholder = pct ? '15' : '10000';
+    });
+
+    $('rand-btn').addEventListener('click', () => {
+      const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const bytes = new Uint8Array(8);
+      crypto.getRandomValues(bytes);
+      $('f-code').value = Array.from(bytes, (b) => alphabet[b % alphabet.length]).join('');
+    });
+
+    $('create-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = $('create-msg');
+      const code = $('f-code').value.trim().toUpperCase();
+      const type = $('f-type').value;
+      const value = Number($('f-value').value);
+
+      if (!/^[A-Z0-9]{3,20}$/.test(code)) return setMsg(msg, 'Mã chỉ gồm chữ hoa và số, dài 3-20 ký tự.', 'err');
+      if (!(value > 0)) return setMsg(msg, 'Giá trị giảm phải lớn hơn 0.', 'err');
+      if (type === 'percent' && value > 100) return setMsg(msg, 'Giảm theo % tối đa là 100.', 'err');
+
+      $('create-btn').disabled = true;
+      try {
+        const d = await call({
+          action: 'adminCreate', code, type, value,
+          minOrder: $('f-min').value || 0, maxUses: $('f-max').value || 0,
+          expires: $('f-exp').value, note: $('f-note').value
+        });
+        if (d.status === 'ok') {
+          setMsg(msg, 'Đã tạo mã ' + code + ' — khách có thể dùng ngay trên website.', 'ok');
+          $('create-form').reset();
+          $('f-type').dispatchEvent(new Event('change'));
+          refresh();
+        } else {
+          setMsg(msg, d.message || 'Không tạo được mã.', 'err');
+        }
+      } catch (err) {
+        setMsg(msg, 'Không kết nối được. Hãy bấm "Tải lại" để xem mã đã tạo chưa, tránh tạo trùng.', 'warn');
+      } finally {
+        $('create-btn').disabled = false;
+      }
+    });
+
+    /* ---- Dùng thử mã ---- */
+    KLYRO_CONFIG.packages.filter((p) => !p.isFree).forEach((p) => {
+      const o = document.createElement('option');
+      o.value = p.id;
+      o.textContent = p.name + ' — ' + fmt(p.price) + 'đ';
+      $('t-pkg').appendChild(o);
+    });
+    $('t-btn').addEventListener('click', async () => {
+      const code = $('t-code').value.trim().toUpperCase();
+      const msg = $('t-msg');
+      if (!code) return;
+      try {
+        const res = await fetch(API + '?action=checkCode&code=' + encodeURIComponent(code) + '&packageId=' + encodeURIComponent($('t-pkg').value));
+        const d = await res.json();
+        if (d.status === 'ok') setMsg(msg, 'Dùng được: ' + d.desc + ' → giảm ' + fmt(d.discount) + 'đ cho gói này.', 'ok');
+        else setMsg(msg, 'Không dùng được: ' + (d.message || 'không hợp lệ'), 'warn');
+      } catch (err) { setMsg(msg, 'Không kết nối được.', 'err'); }
+    });
+  </script>
+</body>
+</html>
