@@ -9,7 +9,7 @@ const KLYRO_CONFIG = {
     phone: "",      // VD: "0901 234 567"  (để trống = ẩn)
     zalo: "",       // VD: "0901234567"    (để trống = ẩn)
     address: "",    // VD: "Quận 1, TP.HCM" (để trống = ẩn)
-    hours: "",      // VD: "8h - 21h hằng ngày" (để trống = ẩn)
+    hours: "11h - 21h hằng ngày",      // VD: "8h - 21h hằng ngày" (để trống = ẩn)
     credit: "Thiết kế bởi Klyro"
   },
 
@@ -18,7 +18,7 @@ const KLYRO_CONFIG = {
   requireOtpForFree: true,
 
   // Link Web App của Google Apps Script (Deploy > Web app)
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbw7e8rIxWbeucqBmPBRWBBr1pvbFGS04xhR6YoiQm8IAmmY9pMLuEISQuOi57S40eY/exec",
 
   // Thông tin nhận thanh toán (VietQR).
   // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".
