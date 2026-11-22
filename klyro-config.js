@@ -13,8 +13,12 @@ const KLYRO_CONFIG = {
     credit: "Thiết kế bởi Klyro"
   },
 
+  // Bắt buộc xác minh email bằng mã OTP khi đặt gói miễn phí.
+  // Phải khớp với REQUIRE_OTP_FOR_FREE trong Code.gs (cùng bật hoặc cùng tắt).
+  requireOtpForFree: true,
+
   // Link Web App của Google Apps Script (Deploy > Web app)
-  apiEndpoint: "https://script.google.com/macros/s/AKfycbwzGOcYpPYUS5g4MvWy_q8iJ1qW6T1cQmNplYmZ0W_dfB19Ap1WLo06dsg-_QbMorXw/exec",
+  apiEndpoint: "https://script.google.com/macros/s/AKfycbwvSnLdPZqF-IVdRruQunictfaThXpxmvZOYi8CYc8UTQ5Wj2JPJYril8EsR4eDtIAY/exec",
 
   // Thông tin nhận thanh toán (VietQR).
   // enabled: false  -> trang thanh toán KHÔNG hiện mã QR, chỉ báo "Klyro sẽ gửi thông tin thanh toán qua liên hệ bạn đã nhập".

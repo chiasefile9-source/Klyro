@@ -18,3 +18,6 @@ Web tĩnh (HTML/CSS/JS), không cần build. Backend: Google Apps Script (file `
 4. Thu hồi khóa Gemini cũ trên Google AI Studio (từng nằm công khai trong `ai-config.js`).
 5. Nếu đổi giá: sửa ở CẢ `klyro-config.js` (hiển thị) và `Code.gs` (tính tiền thật).
 6. Mã giảm giá: đặt `ADMIN_KEY` trong Apps Script (Cài đặt dự án > Thuộc tính tập lệnh), rồi vào `admin-codes.html` để tạo/tắt/xoá mã. Mã tạo xong dùng được ngay.
+7. Email: mỗi đơn gửi 2 email (báo bạn + xác nhận cho khách), gói free thêm 1 email OTP. Gmail thường có hạn mức khoảng 100 email/ngày.
+8. Xác minh email gói free: `REQUIRE_OTP_FOR_FREE` (Code.gs) và `requireOtpForFree` (klyro-config.js) phải cùng bật hoặc cùng tắt.
+9. Khi có tên miền mới: đổi `SITE_URL` trong Code.gs để link tra cứu trong email đúng.
